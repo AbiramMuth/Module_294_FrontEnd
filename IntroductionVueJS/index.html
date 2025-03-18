@@ -11,11 +11,24 @@
     <!--Affichage des données-->
     <div id="app">
         <h1>{{ product }}</h1>
+        <a :href="SiteEtml">ETML</a> <!-- utilisation de v-vbind:href pour accéder au lien -->
         <p>{{ description }}</p>
+        
+        <!-- Affichage de la phrase en stock ou pas en stock-->
+         <!-- Utilisation d'un if / else, avec un booléen-->
+        <p v-if="inStock">In Stock</p> <!-- inStock = true -->
+        <p v-else>Out of Stock</p> <!-- inStock = false -->
+        
+        <!-- doit se situer dans la div de l'id app -->
+        <!-- Affichage d'une image-->
+        <div class="product-image">
+            <img v-bind:src="image" width="300"> <!-- raccourci: <img :src="image">-->
+        </div>
+
     </div>
     <!--Montage de l'App -->
     <script>
-    const mountedApp = my_app.mount('#app')
+    const mountedApp = my_app.mount('#app');
     </script>
 </body>
 </html>
