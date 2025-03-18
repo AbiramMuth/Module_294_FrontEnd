@@ -44,6 +44,11 @@
         <br>
         <div v-for="s in sizes">{{s}}</div> <!-- Affichage des tailles -->
 
+        <!-- Gestion des évènement (Incrementation sur le bouton à chaque clic) -->
+        <div class="cart">Panier({{ cart }})</div><!-- Affiche le nombre de produit que y a dans le panier -->
+           <!-- <button class="button" v-on:click="cart+=1">Add to Cart</button>  évenement click, qui s'incrémente -->
+        <button class="button" v-on:click="addToCart">Add to Cart</button>
+
     </div>
     <!--Montage de l'App -->
     <script>
