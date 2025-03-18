@@ -16,14 +16,33 @@
         
         <!-- Affichage de la phrase en stock ou pas en stock-->
          <!-- Utilisation d'un if / else, avec un booléen-->
-        <p v-if="inStock">In Stock</p> <!-- inStock = true -->
-        <p v-else>Out of Stock</p> <!-- inStock = false -->
-        
+        <!-- <p v-if="inStock">In Stock</p>  inStock = true -->
+         <!--<p v-else>Out of Stock</p>  inStock = false -->
+       <!-- Utilisation de v-show= à la place de v-if, dans le cas ou il'n'y a pas de else (plus performant)-->
+        <!-- If avec condition, Si l'inventaire est plus grand que 10, affiche le texte --> 
+        <p v-if="inventory > 10">In Stock</p>
+        <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!!!</p>
+        <p v-else>Out of Stock</p>
+
+        <!-- if onSale = true, affiche le text -->
+        <p v-show="onSale">On sale</p>
+
         <!-- doit se situer dans la div de l'id app -->
         <!-- Affichage d'une image-->
         <div class="product-image">
             <img v-bind:src="image" width="300"> <!-- raccourci: <img :src="image">-->
         </div>
+
+        <!-- Affichage d'une liste (tableau) -->
+        <ul>
+            <li v-for="d in details">{{ d }}</li><!-- foreach, affiche le tableau, ul et li sous format de liste-->
+        </ul>
+
+        <!-- Affichage des variantse de couleurs (tableau) -->
+        <div v-for="v in variants" v-bind:key="v.id">{{v.color}}</div>
+
+        <br>
+        <div v-for="s in sizes">{{s}}</div> <!-- Affichage des tailles -->
 
     </div>
     <!--Montage de l'App -->
