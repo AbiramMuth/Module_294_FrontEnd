@@ -8,23 +8,52 @@ const my_app = Vue.createApp({
     data() {
         return {
             // données
-            product: 'Boots',
+            product: product,   // nom du produit
+            brand: 'Vue Mastery', // titre
             description: description,
-            image: './assets/images/socks_green.jpg', // emplacement de l'img
             SiteEtml: etml,  // lien du site
-            inStock: false, // booléen
-            inventory: 8,
+            inventory: 11,
             onSale: true,
             details: ['50% coton', '30% wool', '20% polyester'],  // tableau
-            variants: [{ id: 2234, color: 'green' }, { id: 2235, color: 'blue' }],
+            variants: [{ id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
+            { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 }],
             sizes: ['S', 'M', 'L', 'XL'],
-            cart: 0,
+            cart: 0, // la valeur de carte change
+            selectedVariant: 0,
         }
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            this.cart += 1 // $ chaque clic cart s'incrémente de 1
+        },
+        removeItem() {
+            this.cart -= 1;
+        },
+        updateImage(variantImage) {
+            this.image = variantImage
+        },
+        // permet de savoir quelle variant de produit est sélectionné
+        updateVariant(index) {
+            this.selectedVariant = index
+        },
+        sale(){
+            let onSale = this.band + ' ' + this.product + ' ' + onSale
+            return  onSale
         }
-    }
+    },
+    computed: {
+        // titre de la page
+        title() {
+            return this.brand + ' ' + this.product
+        },
+        // choisi soit le premier image ou deuxieme qui se trouve dans le tableau variants en fonction de la valeur selectedVariant
+        image() {
+            return this.variants[this.selectedVariant].image
+        },
+        // Affiche l'image de la variante et affiche si'il est en stock ou en rupture, en utilisant la quantité
+        inStock() {
+            return this.variants[this.selectedVariant].quantity
+        },
+    },
 
 });

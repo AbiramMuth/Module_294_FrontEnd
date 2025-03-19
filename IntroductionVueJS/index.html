@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/styles.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- importation de vue js --> 
     <script src="./main.js"></script>    <!--Importation de l'App -->
 </head>
 <body>
     <!--Affichage des données-->
     <div id="app">
-        <h1>{{ product }}</h1>
+        <h1>{{ title }}</h1> <!-- Affiche la marque + le mot du produit-->
+        <p>{{ text }}</p>
         <a :href="SiteEtml">ETML</a> <!-- utilisation de v-vbind:href pour accéder au lien -->
         <p>{{ description }}</p>
         
@@ -20,17 +22,17 @@
          <!--<p v-else>Out of Stock</p>  inStock = false -->
        <!-- Utilisation de v-show= à la place de v-if, dans le cas ou il'n'y a pas de else (plus performant)-->
         <!-- If avec condition, Si l'inventaire est plus grand que 10, affiche le texte --> 
-        <p v-if="inventory > 10">In Stock</p>
-        <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!!!</p>
-        <p v-else>Out of Stock</p>
-
+        <p v-if="inventory > 10">In Stock ({{inventory}})</p>
+        <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!!!  ({{inventory}})</p>
+        <p v-else>Out of Stock  ({{inventory}})</p>
+        
         <!-- if onSale = true, affiche le text -->
         <p v-show="onSale">On sale</p>
 
         <!-- doit se situer dans la div de l'id app -->
         <!-- Affichage d'une image-->
         <div class="product-image">
-            <img v-bind:src="image" width="300"> <!-- raccourci: <img :src="image">-->
+            <img :class="{'out-of-stock-img': !inStock}" v-bind:src="image">  <!-- raccourci: <img :src="image">-->
         </div>
 
         <!-- Affichage d'une liste (tableau) -->
@@ -38,8 +40,9 @@
             <li v-for="d in details">{{ d }}</li><!-- foreach, affiche le tableau, ul et li sous format de liste-->
         </ul>
 
-        <!-- Affichage des variantse de couleurs (tableau) -->
-        <div v-for="v in variants" v-bind:key="v.id">{{v.color}}</div>
+        <!-- Affichage des variantse de couleurs (tableau), mouseover : change la couleur des chausettes en passant la souris sur les couleurs  -->
+        <!-- <div v-for="v in variants" v-bind:key="v.id" v-on:mouseover="updateImage(v.image)">{{v.color}}</div>   Ecris green et blue, index est un paramètre-->
+        <div class="color-circle" v-for="(v, index) in variants" v-bind:key="v.id" v-on:mouseover="updateVariant(index)" v-bind:style="{ backgroundColor: v.color }"></div> <!-- AFfiche la couleur green et blue, format css 'background-color: v.color' -->
 
         <br>
         <div v-for="s in sizes">{{s}}</div> <!-- Affichage des tailles -->
@@ -47,7 +50,12 @@
         <!-- Gestion des évènement (Incrementation sur le bouton à chaque clic) -->
         <div class="cart">Panier({{ cart }})</div><!-- Affiche le nombre de produit que y a dans le panier -->
            <!-- <button class="button" v-on:click="cart+=1">Add to Cart</button>  évenement click, qui s'incrémente -->
-        <button class="button" v-on:click="addToCart">Add to Cart</button>
+           <button class="button" :class="{disabledButton: !inStock}" :disabled="!inStock" v-on:click="addToCart">Add to Cart</button> <!-- disabled : Quand inStock est false, le bouton est désactivé -->
+             <!-- Version raccourci @click="addToCart"> -->
+        <button v-show="cart > 0" class="button"v-on:click="removeItem">Remove Item</button>
+
+
+
 
     </div>
     <!--Montage de l'App -->
