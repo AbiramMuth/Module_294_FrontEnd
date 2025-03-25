@@ -36,10 +36,6 @@ const my_app = Vue.createApp({
         updateVariant(index) {
             this.selectedVariant = index
         },
-        sale(){
-            let onSale = this.band + ' ' + this.product + ' ' + onSale
-            return  onSale
-        }
     },
     computed: {
         // titre de la page
@@ -53,6 +49,12 @@ const my_app = Vue.createApp({
         // Affiche l'image de la variante et affiche si'il est en stock ou en rupture, en utilisant la quantité
         inStock() {
             return this.variants[this.selectedVariant].quantity
+        },
+        sale(){
+            if(this.onSale){
+               return onSale = this.brand + ' ' + this.product + ' is on sale!' // si c'est est true, affiche le message
+            }
+            return  '' // sinon affiche rien
         },
     },
 

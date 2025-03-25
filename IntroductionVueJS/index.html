@@ -27,7 +27,7 @@
         <p v-else>Out of Stock  ({{inventory}})</p>
         
         <!-- if onSale = true, affiche le text -->
-        <p v-show="onSale">On sale</p>
+        <p> {{ sale }} </p>
 
         <!-- doit se situer dans la div de l'id app -->
         <!-- Affichage d'une image-->
@@ -54,6 +54,7 @@
              <!-- Version raccourci @click="addToCart"> -->
         <button v-show="cart > 0" class="button"v-on:click="removeItem">Remove Item</button>
 
+        <!--  -->
 
 
 
