@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Gadget Shop</title>
+    <link rel="stylesheet" href="./style.css"> <!-- Importation du fichier CSS -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- Importation de Vue.js, lien CDN-->
+    <script src="./main.js"></script> <!-- Importation du fichier JavaScript principal -->
+    <script src="./components/GadgetDisplay.js"></script> <!-- Importation du composant GadgetDisplay -->
+    <script src="./components/CartDisplay.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <p>{{ description }}</p>
+        <!-- Affichage du panier, à L'aide du composant -->
+        <cart-display :card="card" @remove-from-cart="removeFromCart"></cart-display> <!-- add-to-cart est un événement personnalisé émis par le composant GadgetDisplay -->
+    
+        <!--Affichage du total/prix-->
+     <h3>
+        💰 Total : <span v-show="cartTotal < 1000">{{ cartTotal }}$ </span> 
+        <span v-show="cartTotal >= 1000">
+          <s>{{ cartTotal }}$ </s>
+          <strong>➡ {{discountedTotal}}$ (-10%)</strong>
+        </span>
+      </h3>
+
+        <!--Affichage des produits-->
+        <div class="gadget-container">
+            <gadget-display :gadget="gadget" v-for="gadget in gadgets" :key="gadget.id" @add-to-cart="addToCart"></gadget-display> <!-- add-to-cart est un événement personnalisé émis par le composant GadgetDisplay -->
+            <gadget-display :gadget="gadget" v-for="gadget in gadgets" :key="gadget.id" @add-to-cart="addToCart"></gadget-display>
+         
+        </div>
+
+    </div>
+    <!-- Montage de l'application -->
+    <script>
+        const mountedApp = app.mount('#app');
+    </script>
+</body>
+
+</html>
