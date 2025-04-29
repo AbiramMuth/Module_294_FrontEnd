@@ -9,14 +9,22 @@ const events = ref(null)
 
 // récupération des événements depuis l'API lorsque le composant est monté
 onMounted(() =>{
+  EventService.getEvents() // appel de la méthode getEvents du service EventService
+  .then((response)=>{
+    events.value = response.data // stockage des événements dans la variable réactive events
+  })
+  .catch((error) =>{
+    console.log(error) // gestion des erreurs
+  })
+  /*
   axios
-  .get('https://my-json-server.typicode.com/Code-Pop/Real-World_vue-3/events') // requête GET pour récupérer les événements
+  .get('https://my-json-server.typicode.com/Code-Pop/Real-World_vue-3/events') // requête GET pour récupérer les événements (affiche les données de l'identifiant 123)
   .then((response) => {
     events.value = response.data // stockage des événements dans la variable réactive events
   })
   .catch((error) => {
     console.log(error) // gestion des erreurs
-  })
+  })*/
 })
 </script>
 

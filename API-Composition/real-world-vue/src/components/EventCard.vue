@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    <RouterLink to="event/5928101">
+    <RouterLink to="event/123">
         <div class="event-card">
             <h2>{{ event.title }}</h2>  <!-- Affiche le titre de l'événement et l'heure et la date -->
             <span>@{{ event.time }} on {{ event.date }}</span>

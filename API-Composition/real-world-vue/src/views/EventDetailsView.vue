@@ -1,6 +1,7 @@
 <script>
 import { ref, onMounted } from 'vue' // importation de la fonction ref qui permet de créer des références réactives
-import EventService from '@/services/EventService'
+import EventService from '@/services/EventService' // importation du service EventService pour récupérer les événements
+
 
 const event = ref(null) // création d'une référence réactive pour stocker l'événement
 const id = ref(123) // création d'une référence réactive pour stocker l'identifiant de l'événement
@@ -17,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-<div>
+<div v-if="event">
     <h1>{{ event.title }}</h1>
     <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
     <p>{{ event.description }}</p>
