@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router' // Importation de la bibliothèque vue-router
-import EventListView from '../views/EventListView.vue' // Importation du composant HomeView
-import AboutView from '../views/AboutView.vue' // Importation du composant AboutView
-import EventDetailsView from '../views/EventDetailsView.vue' // Importation du composant EventDetailsView
+import { createRouter, createWebHistory } from 'vue-router'
+import EventListView from '../views/EventListView.vue'
+import EventDetailsView from '../views/EventDetailsView.vue'
+import AboutView from '../views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,14 +12,15 @@ const router = createRouter({
       component: EventListView,
     },
     {
-      path: '/event/123',
-      name: 'event-details',
-      component: EventDetailsView,
-    },
-    {
       path: '/about',
       name: 'about',
       component: AboutView,
+    },
+    {
+      path: '/event/:id', // route dynamic
+      name: 'event-details',
+      props: true, // donne accès aux props
+      component: EventDetailsView,
     },
   ],
 })

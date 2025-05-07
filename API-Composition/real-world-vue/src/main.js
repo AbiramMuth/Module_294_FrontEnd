@@ -1,13 +1,12 @@
-
-import { createApp } from 'vue' // Importation de la méthode createApp depuis Vue
+import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from './App.vue' // Importation du composant App
+import App from './App.vue'
 import router from './router'
 
-const app = createApp(App) // Création de l'application Vue avec le composant App
+const app = createApp(App)
 
-app.use(createPinia()) // Utilisation d'une instance de Pinia pour la gestion d'état
+app.use(createPinia())
 app.use(router)
 
-app.mount('#app') // Montage de l'application sur l'élément HTML avec l'ID 'app'
+app.mount('#app')

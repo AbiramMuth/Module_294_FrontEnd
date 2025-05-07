@@ -1,43 +1,30 @@
-
 <script setup>
-import EventCard from '@/components/EventCard.vue' // importation du composant EventCard
-import { ref, onMounted} from 'vue' // importation de la fonction ref qui permet de créer des références réactives
-import axios from 'axios' // importation de la bibliothèque axios pour faire des requêtes HTTP
-import EventService from '@/services/EventService'
+import { ref, onMounted } from 'vue'
+import EventCard from '@/components/EventCard.vue'
+import EventService from '@/services/EventService.js'
 
 const events = ref(null)
 
-// récupération des événements depuis l'API lorsque le composant est monté
-onMounted(() =>{
-  EventService.getEvents() // appel de la méthode getEvents du service EventService
-  .then((response)=>{
-    events.value = response.data // stockage des événements dans la variable réactive events
-  })
-  .catch((error) =>{
-    console.log(error) // gestion des erreurs
-  })
-  /*
-  axios
-  .get('https://my-json-server.typicode.com/Code-Pop/Real-World_vue-3/events') // requête GET pour récupérer les événements (affiche les données de l'identifiant 123)
-  .then((response) => {
-    events.value = response.data // stockage des événements dans la variable réactive events
-  })
-  .catch((error) => {
-    console.log(error) // gestion des erreurs
-  })*/
+onMounted(() => {
+  EventService.getEvents()
+    .then((response) => {
+      events.value = response.data
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 </script>
 
 <template>
-<h1>Events for Good</h1>
+  <h1>Events For Good</h1>
   <div class="events">
-    <EventCard v-for="event in events" :key="event.id" :event="event" /> <!-- boucle sur les événements et affiche le composant EventCard pour chaque événement -->
+    <EventCard v-for="event in events" :key="event.id" :event="event" />
   </div>
 </template>
 
-<style scoped> /* grâce à scoped, le style est appliqué uniquement au composant HomeView.vue */
-/* utilisation de flexbox pour centrer les cartes */
-.events{
+<style scoped>
+.events {
   display: flex;
   flex-direction: column;
   align-items: center;
