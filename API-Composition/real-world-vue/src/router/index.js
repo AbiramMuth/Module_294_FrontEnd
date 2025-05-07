@@ -8,17 +8,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'event-list',
+      name: 'event-list', // nom de la route
       component: EventListView,
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'about', // nom de la route
       component: AboutView,
     },
     {
       path: '/event/:id', // route dynamic
-      name: 'event-details',
+      name: 'event-details', // nom de la route
       props: true, // donne accès aux props
       component: EventDetailsView,
     },
